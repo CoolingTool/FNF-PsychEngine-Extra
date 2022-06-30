@@ -6460,6 +6460,7 @@ class PlayState extends MusicBeatState
 		opponentSingAnimations = CoolUtil.coolArrayTextFile(Paths.txt('note_animations'))[opponentKeys-1];
 	}
 
+<<<<<<< HEAD
 	#if mobile
 	function resetNoteButtons() {
 		grpNoteButtons.clear();
@@ -6468,6 +6469,16 @@ class PlayState extends MusicBeatState
 				var button = new NoteButton(Std.int(FlxG.width / playerKeys) * i, 0, i, playerKeys);
 				button.cameras = [camButtons];
 				grpNoteButtons.add(button);
+=======
+			var ret:Dynamic = script.call(event, args);
+			if(ret == FunkinLua.Function_StopLua && !ignoreStops)
+				break;
+			
+			// had to do this because there is a bug in haxe where Stop != Continue doesnt work
+			var bool:Bool = ret == FunkinLua.Function_Continue;
+			if(!bool) {
+				returnVal = cast ret;
+>>>>>>> 0c0c8e4 (Update PlayState.hx)
 			}
 		}
 	}
@@ -6493,7 +6504,7 @@ class PlayState extends MusicBeatState
 				// had to do this because there is a bug in haxe where Stop != Continue doesnt work
 				var bool:Bool = ret == FunkinLua.Function_Continue;
 				if(!bool) {
-					returnVal = ret;
+					returnVal = cast ret;
 				}
 			}
 			#end
@@ -6511,7 +6522,7 @@ class PlayState extends MusicBeatState
 				// had to do this because there is a bug in haxe where Stop != Continue doesnt work
 				var bool:Bool = ret == FunkinLua.Function_Continue;
 				if(!bool) {
-					returnVal = ret;
+					returnVal = cast ret;
 				}
 			}
 			#end
