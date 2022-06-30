@@ -2927,8 +2927,9 @@ class FunkinLua {
 	}
 
 	#if LUA_ALLOWED
-	function resultIsAllowed(leLua:State, ?leResult:Int) { //Makes it ignore warnings
-		return Lua.type(leLua, leResult) >= Lua.LUA_TNIL;
+	function resultIsAllowed(leLua:State, leResult:Null<Int>) { //Makes it ignore warnings
+		var type:Int = Lua.type(leLua, leResult);
+		return type >= Lua.LUA_TNIL && type < Lua.LUA_TTABLE && type != Lua.LUA_TLIGHTUSERDATA;
 	}
 
 	function isErrorAllowed(error:String) {
