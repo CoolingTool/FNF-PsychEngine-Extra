@@ -4049,11 +4049,11 @@ class PlayState extends MusicBeatState
 			var division:Float = 1 / healthBar.numDivisions;
 
 			if (!opponentChart) {
-				iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, healthBar.numDivisions, 0) * division)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
-				iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, healthBar.numDivisions, 0) * division)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+				iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.value, healthBar.min, healthBar.max, healthBar.numDivisions, 0) * division)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+				iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.value, healthBar.min, healthBar.max, healthBar.numDivisions, 0) * division)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 			} else {
-				iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 0, healthBar.numDivisions) * division)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
-				iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 0, healthBar.numDivisions) * division)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+				iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.value, healthBar.min, healthBar.max, 0, healthBar.numDivisions) * division)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+				iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.value, healthBar.min, healthBar.max, 0, healthBar.numDivisions) * division)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 			}
 
 			if (health > 2)
@@ -5489,7 +5489,7 @@ class PlayState extends MusicBeatState
 
 				var spr:StrumNote = playerStrums.members[key];
 				if (opponentChart) spr = opponentStrums.members[key];
-				if (spr != null && spr.animation.curAnim.name != 'confirm')
+				if (spr != null && spr.animation.curAnim != null && spr.animation.curAnim.name != 'confirm')
 				{
 					spr.playAnim('pressed');
 					spr.resetAnim = 0;
@@ -5799,7 +5799,7 @@ class PlayState extends MusicBeatState
 		}
 
 		var time:Float = 0.15;
-		if (note.isSustainNote && !note.animation.curAnim.name.endsWith('end')) {
+		if (note.isSustainNote && note.animation.curAnim != null && !note.animation.curAnim.name.endsWith('end')) {
 			time += 0.15;
 		}
 		strumPlayAnim(true, note.noteData, time);

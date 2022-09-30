@@ -232,10 +232,10 @@ class Song
 			var sectionBeats:Null<Float> = sec.sectionBeats;
 			if (numerator != null && denominator != null) {
 				swagShit.notes[i].timeSignature = [numerator, denominator];
-			}
-			if (sectionBeats != null) {
-				swagShit.notes[i].timeSignature[0] = Math.round(sectionBeats);
-				swagShit.notes[i].changeSignature = true;
+				if (sectionBeats != null) {
+					swagShit.notes[i].timeSignature[0] = Math.round(sectionBeats);
+					swagShit.notes[i].changeSignature = true;
+				}
 			}
 		}
 
