@@ -3305,7 +3305,7 @@ class PlayState extends MusicBeatState
 				swagNote.sustainLength = songNotes[2];
 				swagNote.gfNote = (section.gfSection && (songNotes[1] < rightKeys));
 				swagNote.characters = songNotes[4];
-				if (songNotes[4] == null) swagNote.characters = [0];
+				if (!Std.isOfType(songNotes[4], Array)) swagNote.characters = [0];
 				swagNote.bpm = curBPM;
 				swagNote.noteType = songNotes[3];
 				swagNote.scrollFactor.set();
@@ -3324,7 +3324,7 @@ class PlayState extends MusicBeatState
 						sustainNote.isOpponent = isOpponent;
 						sustainNote.gfNote = swagNote.gfNote;
 						sustainNote.characters = songNotes[4];
-						if (songNotes[4] == null) sustainNote.characters = [0];
+						if (!Std.isOfType(songNotes[4], Array)) sustainNote.characters = [0];
 						sustainNote.bpm = curBPM;
 						sustainNote.noteType = swagNote.noteType;
 						sustainNote.scrollFactor.set();
